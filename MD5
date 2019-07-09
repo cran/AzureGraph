@@ -1,7 +1,7 @@
-4809ea51c477b324a9fa1591bc7a1da1 *DESCRIPTION
+15c804373c20da410abe224c974bee46 *DESCRIPTION
 4dd4040e3beaa3462c568ce9d0620d9d *LICENSE
 f0259da850d566525b306ff8caa07728 *NAMESPACE
-d81d90d9a69296a7f2e6148c3a225bef *NEWS.md
+01c3bf0c1e98a70fd52936f3e61ad56b *NEWS.md
 0d546ffefeb2ff17a393c6efdfde63f3 *R/AzureGraph.R
 d732ca0c36805276d0a9f36119dcd561 *R/az_app.r
 885b11d4cb411e295f97571e4cd794b3 *R/az_device.R
@@ -9,11 +9,11 @@ d732ca0c36805276d0a9f36119dcd561 *R/az_app.r
 46ffcf449316c8a6efc2803ffcc5e82e *R/az_object.R
 2c62502066118967b4f343ced727b0f9 *R/az_svc_principal.R
 5ceea5059e1be2054a9658d369310958 *R/az_user.R
-40421a90b6a4064ce10acf75667a1b17 *R/call_graph.R
+21a0e07120da3b23f8fab6e5d8c85f4d *R/call_graph.R
 e8100ab7761c7b5a75d2a2e04b78bb65 *R/format.R
-6d33ec43eadfdb1cb5028b0700ec37a4 *R/graph_login.R
+ca37542c9d3f250d7f9c65f23d504ea5 *R/graph_login.R
 30c29d453399fef2ac65fe9ba1561d45 *R/is.R
-8ead4080fde9163c74c9a1ba5c42fc39 *R/ms_graph.R
+c01cfb1a8c806ce1818c485fa3200e07 *R/ms_graph.R
 fa0ad850aa290490f30df7214f8fbd3d *README.md
 73a7c9e57c2b3d9373ce529b8c75b37a *build/vignette.rds
 795125e88d89aa17da1ae3c9e9b9a9b4 *inst/doc/intro.Rmd
@@ -24,7 +24,7 @@ fa0ad850aa290490f30df7214f8fbd3d *README.md
 f40184404fd870090de264a79404439c *man/az_object.Rd
 58b93ec917643a567bb93957a5f5926f *man/az_service_principal.Rd
 ab35a0b1f4adf22942f6e789b744ab60 *man/az_user.Rd
-0318cbb1f938a7301a1d5d1812bea1b3 *man/call_graph.Rd
+e21f3c02059c42d6f7cc3f5de8763dcb *man/call_graph.Rd
 e1fdac8c5ea51a338d9080cb8e851186 *man/graph_login.Rd
 599c0a7d1d7242b44dfc8417474e38cb *man/info.Rd
 e3ad705b61437df597bda5778f675467 *man/ms_graph.Rd
