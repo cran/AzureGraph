@@ -27,7 +27,7 @@
 call_graph_endpoint <- function(token, operation, ..., options=list(),
                                 api_version=getOption("azure_graph_api_version"))
 {
-    url <- httr::parse_url(token$credentials$resource)
+    url <- httr::parse_url(decode_jwt(token$credentials$access_token)$payload$aud)
     url$path <- construct_path(api_version, operation)
     url$query <- options
 
@@ -41,7 +41,7 @@ call_graph_url <- function(token, url, ..., body=NULL, encode="json",
                            http_status_handler=c("stop", "warn", "message", "pass"),
                            auto_refresh=TRUE)
 {
-    headers <- process_headers(token, ..., encode=encode, auto_refresh=auto_refresh)
+    headers <- process_headers(token, auto_refresh)
 
     # if content-type is json, serialize it manually to ensure proper handling of nulls
     if(encode == "json" && !is_empty(body))
@@ -58,7 +58,7 @@ call_graph_url <- function(token, url, ..., body=NULL, encode="json",
 }
 
 
-process_headers <- function(token, ..., auto_refresh)
+process_headers <- function(token, auto_refresh)
 {
     # if token has expired, renew it
     if(auto_refresh && !token$validate())
@@ -67,8 +67,8 @@ process_headers <- function(token, ..., auto_refresh)
         token$refresh()
     }
 
-    host <- httr::parse_url(if(token$version == 1) token$resource else token$scope[1])$hostname
     creds <- token$credentials
+    host <- httr::parse_url(AzureAuth::decode_jwt(creds$access_token)$payload$aud)$hostname
     headers <- c(
         Host=host,
         Authorization=paste(creds$token_type, creds$access_token),
@@ -157,3 +157,18 @@ is_empty <- function(x)
     length(x) == 0
 }
 
+
+# display confirmation prompt, return TRUE/FALSE (no NA)
+get_confirmation <- function(msg, default=TRUE)
+{
+    ok <- if(getRversion() < numeric_version("3.5.0"))
+    {
+        msg <- paste(msg, if(default) "(Yes/no/cancel) " else "(yes/No/cancel) ")
+        yn <- readline(msg)
+        if(nchar(yn) == 0)
+            default
+        else tolower(substr(yn, 1, 1)) == "y"
+    }
+    else utils::askYesNo(msg, default)
+    isTRUE(ok)
+}
