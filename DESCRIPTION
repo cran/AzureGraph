@@ -1,6 +1,6 @@
 Package: AzureGraph
 Title: Simple Interface to 'Microsoft Graph'
-Version: 1.0.4
+Version: 1.0.5
 Authors@R: c(
     person("Hong", "Ooi", , "hongooi@microsoft.com", role = c("aut", "cre")),
     person("Microsoft", role="cph")
@@ -17,9 +17,9 @@ Imports: AzureAuth (>= 1.0.1), utils, httr (>= 1.3), jsonlite, openssl,
 Suggests: AzureRMR, knitr, testthat
 RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2019-09-20 13:50:51 UTC; hongo
+Packaged: 2019-10-15 19:19:38 UTC; hongo
 Author: Hong Ooi [aut, cre],
   Microsoft [cph]
 Maintainer: Hong Ooi <hongooi@microsoft.com>
 Repository: CRAN
-Date/Publication: 2019-09-20 14:20:02 UTC
+Date/Publication: 2019-10-15 20:00:02 UTC
