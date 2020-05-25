@@ -1,8 +1,8 @@
-1e03e8ed143d12220ef28fd0735a1686 *DESCRIPTION
+c54be2fbfc2a39b95526014338597595 *DESCRIPTION
 4dd4040e3beaa3462c568ce9d0620d9d *LICENSE
 f0259da850d566525b306ff8caa07728 *NAMESPACE
-a766486091e8461e4be61ea48cc24290 *NEWS.md
-0d546ffefeb2ff17a393c6efdfde63f3 *R/AzureGraph.R
+e952df10a3b28f8eb3ad1b254d3de91f *NEWS.md
+948043eb30a455baf6df2808d79d6826 *R/AzureGraph.R
 0a41b7a128a7218deb6d601d745cd7cd *R/az_app.r
 885b11d4cb411e295f97571e4cd794b3 *R/az_device.R
 7cd1dbcdbd776f2c03036e57dd0c064f *R/az_group.R
@@ -16,9 +16,9 @@ e8100ab7761c7b5a75d2a2e04b78bb65 *R/format.R
 814fb11f905afd6485596d663428b2d8 *R/ms_graph.R
 c6811501adeca4c196a8b294705cd3f5 *R/read_cert.R
 cbf8dfee135757d841e645e01098c966 *README.md
-351f95a45ca174bae342d6efb681ecf9 *build/vignette.rds
+541e26764d4a5d6611a1811b38b8a811 *build/vignette.rds
 4b23691ea164c74bda71c4e21d955375 *inst/doc/intro.Rmd
-ef4ea3f772b7f19969a71be1b591e371 *inst/doc/intro.html
+f7bcfd5a681c72a6afa89c0e22bf8511 *inst/doc/intro.html
 78387e59256dc23da8da6e3d4465e124 *man/az_app.Rd
 2762fc821fe380eeaa1aa7b2fc58296a *man/az_device.Rd
 828339e7d93e8a3abefb73cf3ebbdcc9 *man/az_group.Rd
