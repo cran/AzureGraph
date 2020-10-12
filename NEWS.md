@@ -1,3 +1,7 @@
+# AzureGraph 1.1.2
+
+- Change maintainer email address.
+
 # AzureGraph 1.1.1
 
 - Switch to the v1.0 REST endpoint.
