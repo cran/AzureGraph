@@ -3,13 +3,13 @@ context("App creation/deletion")
 tenant <- Sys.getenv("AZ_TEST_TENANT_ID")
 pemfile <- Sys.getenv("AZ_TEST_CERT_FILE")
 
-if(tenant == "" || cert_thumb == "")
+if(tenant == "" || pemfile == "")
     skip("App method tests skipped: login credentials not set")
 
 if(!interactive())
     skip("App method tests skipped: must be in interactive session")
 
-gr <- get_graph_login(tenant=tenant)
+gr <- create_graph_login(tenant=tenant)
 
 
 test_that("App creation works",
