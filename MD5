@@ -1,7 +1,7 @@
-578fbf1f9be471404779c4bcb30c72a8 *DESCRIPTION
+a15a797aab42aa345b2638b1528cafef *DESCRIPTION
 ac2db2c20866612aa01f98131d07710e *LICENSE
 a27b27c30ac507924ac642504d2b09da *NAMESPACE
-9bc412c9d058599ed2177febc11b16d9 *NEWS.md
+970399fd466169c08e3e68ec613ca4b8 *NEWS.md
 89547ea7e11d0946f7b8cf12829f65d4 *R/AzureGraph.R
 6ff3bed54aa80a70f53d49037decf620 *R/az_app.r
 d762cd79c66b21ee63647fc334ef2127 *R/az_device.R
@@ -11,11 +11,11 @@ d762cd79c66b21ee63647fc334ef2127 *R/az_device.R
 e238dd9bcffc49806c013ecf7d691521 *R/az_svc_principal.R
 762448e7b6cc1bb5e15b127f7e5af64c *R/az_user.R
 f74a483ed9453bfcd3e6cd08ae8e39f8 *R/call_graph.R
-02a066920702a184a61a097e269bbcc0 *R/format.R
+0fb471d10b0f00dda959c29246e1de70 *R/format.R
 fafee6622b143bc19c48ed10f157e1c6 *R/graph_login.R
 e3e0ac6ac54358d42cce04077b370302 *R/is.R
 31d8ab6b4e46bafed67cf52157a95257 *R/ms_graph.R
-e4ee65a4a9ad92386a64e5d6878e11f5 *R/ms_object.R
+97fab638f6cbca5cf6dd344c0860be61 *R/ms_object.R
 c6811501adeca4c196a8b294705cd3f5 *R/read_cert.R
 ba906e18fadaab5f12b251371b5aca8d *R/utils.R
 72214b0fd3b2876f59b95b3d3b507df4 *R/zzz_class_directory.R
@@ -35,10 +35,10 @@ b663a5d4afa0e49533ffefe4c2070f05 *man/az_user.Rd
 3acd2f2b8a8d9049fd403250ba22ab39 *man/call_graph.Rd
 d6343bd34f0800af2fd33fbaffed549b *man/figures/logo.png
 ca0f921b14b6fb4453d0c928479bcd66 *man/format.Rd
-cba80d52e7df34dec509396e8e03cff7 *man/graph_login.Rd
+98deffae085eb2d7cb9b8d8e38050751 *man/graph_login.Rd
 6bf3d0d43e9d9c976d0bacd956254027 *man/info.Rd
 a8a3a6e20708710189258b76407c5152 *man/ms_graph.Rd
-fa5a52f6e562d73aeffd5bb30019e08b *man/ms_object.Rd
+b507e3546fb9abb4bee12270e3821c0d *man/ms_object.Rd
 72482c17850ef7af6fdeea26fa3202ad *man/register_graph_class.Rd
 0251ec261023461a988070c164caa9e8 *man/utils.Rd
 2e638118b14d7395960c9cac39f0a56a *tests/testthat.R
