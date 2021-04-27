@@ -28,13 +28,11 @@ Class representing an AAD user account.
 \item \code{update(...)}: Update the user information in Azure Active Directory.
 \item \code{do_operation(...)}: Carry out an arbitrary operation on the user account.
 \item \code{sync_fields()}: Synchronise the R object with the app data in Azure Active Directory.
-\item \code{list_group_memberships()}: Return the IDs of all groups this user is a member of.
-\item \code{list_object_memberships()}: Return the IDs of all groups, administrative units and directory roles this user is a member of.
-\item \code{list_direct_memberships(id_only=TRUE)}: List the groups and directory roles this user is a direct member of. Set \code{id_only=TRUE} to return only a vector of IDs (the default), or \code{id_only=FALSE} to return a list of group objects.
-\item \code{list_owned_objects(type=c("user", "group", "application", "servicePrincipal"))}: List directory objects (groups/apps/service principals) owned by this user. Specify the \code{type} argument to filter the result for specific object type(s).
-\item \code{list_created_objects(type=c("user", "group", "application", "servicePrincipal"))}: List directory objects (groups/apps/service principals) created by this user. Specify the \code{type} argument to filter the result for specific object type(s).
-\item \code{list_owned_devices()}: List the devices owned by this user.
-\item \code{list_registered_devices()}: List the devices registered by this user.
+\item \code{list_direct_memberships(filter=NULL, n=Inf)}: List the groups and directory roles this user is a direct member of.
+\item \code{list_owned_objects(type=c("user", "group", "application", "servicePrincipal"), filter=NULL, n=Inf)}: List directory objects (groups/apps/service principals) owned by this user. Specify the \code{type} argument to limit the result to specific object type(s).
+\item \code{list_created_objects(type=c("user", "group", "application", "servicePrincipal"), filter=NULL, n=Inf)}: List directory objects (groups/apps/service principals) created by this user. Specify the \code{type} argument to limit the result to specific object type(s).
+\item \code{list_owned_devices(filter=NULL, n=Inf)}: List the devices owned by this user.
+\item \code{list_registered_devices(filter=NULL, n=Inf)}: List the devices registered by this user.
 \item \code{reset_password(password=NULL, force_password_change=TRUE)}: Resets a user password. By default the new password will be randomly generated, and must be changed at next login.
 }
 }
@@ -42,6 +40,13 @@ Class representing an AAD user account.
 \section{Initialization}{
 
 Creating new objects of this class should be done via the \code{create_user} and \code{get_user} methods of the \link{ms_graph} and \link{az_app} classes. Calling the \code{new()} method for this class only constructs the R object; it does not call the Microsoft Graph API to create the actual user account.
+}
+
+\section{List methods}{
+
+All \verb{list_*} methods have \code{filter} and \code{n} arguments to limit the number of results. The former should be an \href{https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter}{OData expression} as a string to filter the result set on. The latter should be a number setting the maximum number of (filtered) results to return. The default values are \code{filter=NULL} and \code{n=Inf}. If \code{n=NULL}, the \code{ms_graph_pager} iterator object is returned instead to allow manual iteration over the results.
+
+Support in the underlying Graph API for OData queries is patchy. Not all endpoints that return lists of objects support filtering, and if they do, they may not allow all of the defined operators. If your filtering expression results in an error, you can carry out the operation without filtering and then filter the results on the client side.
 }
 
 \examples{
@@ -63,6 +68,13 @@ usr$list_owned_objects()
 
 # owned apps and service principals
 usr$list_owned_objects(type=c("application", "servicePrincipal"))
+
+# first 5 objects
+usr$list_owned_objects(n=5)
+
+# get the pager object
+pager <- usr$list_owned_objects(n=NULL)
+pager$value
 
 }
 }

@@ -15,9 +15,7 @@
 #' - `update(...)`: Update the app data in Azure Active Directory. For what properties can be updated, consult the REST API documentation link below.
 #' - `do_operation(...)`: Carry out an arbitrary operation on the app.
 #' - `sync_fields()`: Synchronise the R object with the app data in Azure Active Directory.
-#' - `list_group_memberships()`: Return the IDs of all groups this app is a member of.
-#' - `list_object_memberships()`: Return the IDs of all groups, administrative units and directory roles this app is a member of.
-#' - `list_owners(type=c("user", "group", "application", "servicePrincipal"))`: Return a list of all owners of this app. Specify the `type` argument to filter the result for specific object type(s).
+#' - `list_owners(type=c("user", "group", "application", "servicePrincipal"), filter=NULL, n=Inf)`: Return a list of all owners of this app. Specify the `type` argument to limit the result to specific object type(s).
 #' - `create_service_principal(...)`: Create a service principal for this app, by default in the current tenant.
 #' - `get_service_principal()`: Get the service principal for this app.
 #' - `delete_service_principal(confirm=TRUE)`: Delete the service principal for this app. By default, ask for confirmation first.
@@ -32,6 +30,10 @@
 #' [Microsoft Graph overview](https://docs.microsoft.com/en-us/graph/overview),
 #' [REST API reference](https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta)
 #'
+#' @section List methods:
+#' All `list_*` methods have `filter` and `n` arguments to limit the number of results. The former should be an [OData expression](https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter) as a string to filter the result set on. The latter should be a number setting the maximum number of (filtered) results to return. The default values are `filter=NULL` and `n=Inf`. If `n=NULL`, the `ms_graph_pager` iterator object is returned instead to allow manual iteration over the results.
+#'
+#' Support in the underlying Graph API for OData queries is patchy. Not all endpoints that return lists of objects support filtering, and if they do, they may not allow all of the defined operators. If your filtering expression results in an error, you can carry out the operation without filtering and then filter the results on the client side.
 #' @seealso
 #' [ms_graph], [az_service_principal], [az_user], [az_group], [az_object]
 #'
@@ -159,10 +161,12 @@ public=list(
         self$update(keyCredentials=creds[-idx])
     },
 
-    list_owners=function(type=c("user", "group", "application", "servicePrincipal"))
+    list_owners=function(type=c("user", "group", "application", "servicePrincipal"), filter=NULL, n=Inf)
     {
-        res <- private$get_paged_list(self$do_operation("owners"))
-        private$init_list_objects(res, type)
+        opts <- list(`$filter`=filter, `$count`=if(!is.null(filter)) "true")
+        hdrs <- if(!is.null(filter)) httr::add_headers(consistencyLevel="eventual")
+        pager <- self$get_list_pager(self$do_operation("owners", options=opts, hdrs, type_filter=type))
+        extract_list_values(pager, n)
     },
 
     create_service_principal=function(...)

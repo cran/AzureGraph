@@ -28,10 +28,8 @@ Class representing an AAD group.
 \item \code{update(...)}: Update the group information in Azure Active Directory.
 \item \code{do_operation(...)}: Carry out an arbitrary operation on the group.
 \item \code{sync_fields()}: Synchronise the R object with the app data in Azure Active Directory.
-\item \code{list_group_memberships()}: Return the IDs of all groups this group is a member of.
-\item \code{list_object_memberships()}: Return the IDs of all groups, administrative units and directory roles this group is a member of.
-\item \code{list_members(type=c("user", "group", "application", "servicePrincipal"))}: Return a list of all members of this group. Specify the \code{type} argument to filter the result for specific object type(s).
-\item \code{list_owners(type=c("user", "group", "application", "servicePrincipal"))}: Return a list of all owners of this group. Specify the \code{type} argument to filter the result for specific object type(s).
+\item \code{list_members(type=c("user", "group", "application", "servicePrincipal"), filter=NULL, n=Inf)}: Return a list of all members of this group. Specify the \code{type} argument to limit the result to specific object type(s).
+\item \code{list_owners(type=c("user", "group", "application", "servicePrincipal"), filter=NULL, n=Inf)}: Return a list of all owners of this group. Specify the \code{type} argument to limit the result to specific object type(s).
 }
 }
 
@@ -40,17 +38,31 @@ Class representing an AAD group.
 Creating new objects of this class should be done via the \code{create_group} and \code{get_group} methods of the \link{ms_graph} and \link{az_app} classes. Calling the \code{new()} method for this class only constructs the R object; it does not call the Microsoft Graph API to create the actual group.
 }
 
+\section{List methods}{
+
+All \verb{list_*} methods have \code{filter} and \code{n} arguments to limit the number of results. The former should be an \href{https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter}{OData expression} as a string to filter the result set on. The latter should be a number setting the maximum number of (filtered) results to return. The default values are \code{filter=NULL} and \code{n=Inf}. If \code{n=NULL}, the \code{ms_graph_pager} iterator object is returned instead to allow manual iteration over the results.
+
+Support in the underlying Graph API for OData queries is patchy. Not all endpoints that return lists of objects support filtering, and if they do, they may not allow all of the defined operators. If your filtering expression results in an error, you can carry out the operation without filtering and then filter the results on the client side.
+}
+
 \examples{
 \dontrun{
 
 gr <- get_graph_login()
 usr <- gr$get_user("myname@aadtenant.com")
 
-grps <- usr$list_direct_memberships()
-grp <- grp[[1]]
+grps <- usr$list_group_memberships()
+grp <- gr$get_group(grps[1])
 
 grp$list_members()
 grp$list_owners()
+
+# capping the number of results
+grp$list_members(n=10)
+
+# get the pager object for a listing method
+pager <- grp$list_members(n=NULL)
+pager$value
 
 }
 }
