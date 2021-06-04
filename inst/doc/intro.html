@@ -309,14 +309,14 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Currently, AzureGraph aims to provide an R interface only to the AAD part, with a view to supporting R interoperability with Azure: registered apps and service principals, users and groups. However, it can be extended to support other services; for more information, see the “Extending AzureGraph” vignette.</p>
 <div id="authentication" class="section level2">
 <h2>Authentication</h2>
-<p>AzureGraph uses a similar authentication procedure to AzureRMR and the <a href="https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest">Azure CLI</a>. The first time you authenticate with a given Azure Active Directory tenant, you call <code>create_graph_login()</code> and supply your credentials. AzureGraph will prompt you for permission to create a special data directory in which to cache the obtained authentication token and AD Graph login. Once this information is saved on your machine, it can be retrieved in subsequent R sessions with <code>get_graph_login()</code>. Your credentials will be automatically refreshed so you don’t have to reauthenticate.</p>
+<p>The first time you authenticate with a given Azure Active Directory tenant, you call <code>create_graph_login()</code> and supply your credentials. AzureGraph will prompt you for permission to create a special data directory in which to cache the obtained authentication token and AD Graph login. Once this information is saved on your machine, it can be retrieved in subsequent R sessions with <code>get_graph_login()</code>. Your credentials will be automatically refreshed so you don’t have to reauthenticate.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(AzureGraph)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co"># authenticate with AAD</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="co"># - on first login, call create_graph_login()</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="co"># - on subsequent logins, call get_graph_login()</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a>gr &lt;-<span class="st"> </span><span class="kw">create_graph_login</span>()</span></code></pre></div>
-<p><strong>Linux DSVM note</strong> If you are using a Linux Data Science Virtual Machine in Azure, you may have problems running <code>create_graph_login()</code> (ie, without arguments). In this case, try <code>create_graph_login(auth_type=&quot;device_code&quot;)</code>.</p>
+<p>See the “Authentication basics” vignette for more details on how to authenticate with AzureGraph.</p>
 </div>
 <div id="users-and-groups" class="section level2">
 <h2>Users and groups</h2>
